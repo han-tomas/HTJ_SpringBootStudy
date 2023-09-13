@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 
+<div class="page-heading products-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-content">
+          <h2>JeJu Travel</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <div class="products">
+      <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+            <div class="section-heading">
+              <h2>제주 여행지</h2>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="filters-content">
+                <div class="row grid"> 
+                    <div class="col-lg-4 col-md-4 all dev" th:each="vo:${list}">
+                      <div class="product-item">
+                        <a th:href="@{/jeju/travel_detail(no=${vo.no})}">
+                        	<img th:src="${vo.poster}" style="width: 350px;height: 250px;">
+                        </a>
+                        <div class="down-content">
+                          <a th:href="@{/jeju/travel_detail(no=${vo.no})}">
+                          	<h4 th:text="${vo.title}"></h4>
+                          </a>
+                          <h6 th:text="${vo.loc}" style="color: orange;"></h6>
+                          <p th:text="${vo.tag}"></p>
+                		  <p th:text="${vo.addr}"></p>
+                        </div>
+                      </div>
+                    </div>                                        
+                </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <ul class="pages">
+      		  <li th:if="${startPage>1}"><a th:href="@{/jeju/travel_list(page=${startPage-1})}">&lt;</a></li>
+			  <li th:class="${curpage==i?'active':''}" th:each="i:${#numbers.sequence(startPage,endPage)}"><a th:href="@{/jeju/travel_list(page=${i})}" th:text="${i}"></a></li>
+			  <li th:if="${endPage<totalpage}"><a th:href="@{/jeju/travel_list(page=${endPage+1})}"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

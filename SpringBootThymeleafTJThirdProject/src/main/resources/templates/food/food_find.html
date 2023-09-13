@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 
+<div class="page-heading contact-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-content">
+          <h2>JeJu Food</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <div class="products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 inline">
+		    <div class="section-heading d-flex justify-content-between">
+		        <h2>제주 맛집 검색</h2>
+		        <div>
+			        <form method="post" action="/food/food_find">
+			            <input type="text" name=fd size=30 class="input-sm" th:value="${fd}">
+			            <button class="btn-sm btn-warning">검색</button>
+			        </form>
+		        </div>
+		    </div>
+		  </div>  
+          <div class="col-md-12">
+            <div class="filters-content">
+                <div class="row grid"> 
+                    <div class="col-lg-4 col-md-4 all dev" th:each="vo:${list}">
+                      <div class="product-item">
+                        <a th:href="@{/food/food_detail(fino=${vo.fino})}">
+                        	<img th:src="${vo.poster}" style="width: 350px;height: 250px;">
+                        </a>
+                        <div class="down-content">
+                          <a th:href="@{/food/food_detail(fino=${vo.fino})}"><h4 th:text="${vo.name}"></h4></a>
+                          <h6 th:text="${vo.type}" style="color: orange; font-size: 10px;"></h6>
+                          <p th:text="${vo.address}"></p>
+                		  <ul class="stars">
+							<li th:each="i: ${#numbers.sequence(1, vo.score.intValue())}">
+						        <i class="fa fa-star" style="color: orange;"></i>
+						    </li>
+                          </ul>  
+                          <span th:text="'평점 '+${vo.score}" style="color: orange;"></span>
+                        </div>
+                      </div>
+                    </div>                                        
+                </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <ul class="pages">
+      		  <li th:if="${startPage>1}"><a th:href="@{/food/food_find(page=${startPage-1},fd=${fd})}"><i class="fa fa-angle-double-left"></i></a></li>
+			  <li th:class="${curpage==i?'active':''}" th:each="i:${#numbers.sequence(startPage,endPage)}"><a th:href="@{/food/food_find(page=${i},fd=${fd})}" th:text="${i}"></a></li>
+			  <li th:if="${endPage<totalpage}"><a th:href="@{/food/food_find(page=${endPage+1},fd=${fd})}"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="banner header-text">
+      <div class="owl-banner owl-carousel">
+        <div class="banner-item-01">
+          <div class="text-content">
+            <h2>natural beauty</h2>
+          </div>
+        </div>
+        <div class="banner-item-02">
+          <div class="text-content">
+            <h2>The Biggest island in South Korea</h2>
+          </div>
+        </div>
+        <div class="banner-item-03">
+          <div class="text-content">
+            <h2>Delicious Foods</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Banner Ends Here -->
+
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>제주 여행지</h2>
+              <a href="/jeju/travel_list" style="color: orange">view all products <i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-md-4" th:each="vo,i:${list}" th:if="${i.index>=0 && i.index<6}">
+            <div class="product-item">
+              <a th:href="@{/jeju/travel_detail(no=${vo.no})}"><img th:src="${vo.poster}" style="width: 350px;height: 250px;"></a>
+              <div class="down-content">
+                <a th:href="@{/jeju/travel_detail(no=${vo.no})}"><h4 th:text="${vo.title}"></h4></a>
+                <h6 th:text="${vo.loc}" style="color: orange;"></h6>
+                 <p th:text="${vo.tag}"></p>
+                 <p th:text="${vo.addr}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>제주 맛집</h2>
+              <a href="/food/food_find" style="color: orange">view all products <i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-md-4" th:each="fvo,j:${flist}" th:if="${j.index>=0 && j.index<6}">
+            <div class="product-item">
+              <a th:href="@{/food/food_detail(fino=${fvo.fino})}"><img th:src="${fvo.poster}" style="width: 350px;height: 250px;"></a>
+              <div class="down-content">
+                <a th:href="@{/food/food_detail(fino=${fvo.fino})}"><h4 th:text="${fvo.name}"></h4></a>
+                <h6 th:text="${fvo.type}" style="color: orange; font-size: 10px"></h6>
+                 <p th:text="${fvo.address}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+</body>
+</html>
